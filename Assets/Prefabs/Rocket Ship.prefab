@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3729566874802513644}
   - component: {fileID: 3729566874802513647}
   - component: {fileID: 3729566874802513646}
-  - component: {fileID: 3729566874802513645}
+  - component: {fileID: 5146651946255734165}
   m_Layer: 0
   m_Name: Rocket Top (2)
   m_TagString: Untagged
@@ -78,8 +78,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &3729566874802513645
-SphereCollider:
+--- !u!65 &5146651946255734165
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -89,7 +89,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3729566875507775662
 GameObject:
