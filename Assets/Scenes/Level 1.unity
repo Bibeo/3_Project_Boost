@@ -130,7 +130,7 @@ PrefabInstance:
     - target: {fileID: 5780253567598645563, guid: c2a60c30113130c41b1e768f29f6feb7,
         type: 3}
       propertyPath: m_Volume
-      value: 0.45
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5780253567598645563, guid: c2a60c30113130c41b1e768f29f6feb7,
         type: 3}
@@ -141,7 +141,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: f169d01914fd0ab4f8e87de46eb938f6, type: 3}
+      objectReference: {fileID: 8300000, guid: 1231f9f7a6d4d5e42be0d449b50db5bf, type: 3}
     - target: {fileID: 5780253567598645563, guid: c2a60c30113130c41b1e768f29f6feb7,
         type: 3}
       propertyPath: Loop
@@ -305,6 +305,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6524155566062862797, guid: 74fc41e722bf622469d1fb72d12e0c86,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 053303a4c5622bc4983fb97856fd240c, type: 3}
     - target: {fileID: 652261653862326581, guid: 74fc41e722bf622469d1fb72d12e0c86,
         type: 3}
       propertyPath: m_Name
