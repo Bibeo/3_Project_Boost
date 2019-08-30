@@ -416,7 +416,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!82 &5780253567598645563
 AudioSource:
@@ -428,11 +428,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f169d01914fd0ab4f8e87de46eb938f6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1231f9f7a6d4d5e42be0d449b50db5bf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.408
+  m_Volume: 0.5
   m_Pitch: 0.5
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -526,6 +526,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1cb65d6c189ce4cb0df8c0c4b237de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rcsThrust: 200
+  pwrThrust: 2200
+  deathDelay: 1
+  mainEngine: {fileID: 8300000, guid: f169d01914fd0ab4f8e87de46eb938f6, type: 3}
+  deathSound: {fileID: 8300000, guid: 51aedf37e5deb9b46a7ab968736a4b6c, type: 3}
+  successSound: {fileID: 8300000, guid: 31f9af8afa2e24d449f70120c911b5a7, type: 3}
+  mainEngineParticles: {fileID: 198100719057022332, guid: a3553fd250eb92d4091bebde350c6739,
+    type: 3}
+  deathParticles: {fileID: 198204746014789312, guid: ab79a37535b979f48b6de56e3a0a5cb0,
+    type: 3}
+  successParticles: {fileID: 198631066050499358, guid: 62198a3a5dbb64a4f9e1618929224faa,
+    type: 3}
 --- !u!1 &3729566876741492891
 GameObject:
   m_ObjectHideFlags: 0
