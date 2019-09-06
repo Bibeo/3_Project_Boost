@@ -9,6 +9,8 @@ public class Rocket : MonoBehaviour
     Rigidbody rocketRigidbody;
     AudioSource rocketAudio;
 
+    bool collisionActive;
+
     enum State { Alive, Dying, Transcending }
     State state = State.Alive;
 
@@ -29,6 +31,7 @@ public class Rocket : MonoBehaviour
     {
         rocketRigidbody = GetComponent<Rigidbody>();
         rocketAudio = GetComponent<AudioSource>();
+        collisionActive = true;
     }
 
     // Update is called once per frame
@@ -39,28 +42,47 @@ public class Rocket : MonoBehaviour
             RepondToThrustInput();
             RespondToRotate();
         }
+        if (Debug.isDebugBuild)
+        {
+            RespondToDebugKeys();
+        }
+    }
+
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionActive = !collisionActive; // Boolean toogle
+        }
     }
 
     void OnCollisionEnter(Collision collision)
-    {
-        if (state != State.Alive) // ignore collisions when dead after the first collision
         {
-            return;
+            if (collisionActive == true)
+            {
+                if (state != State.Alive) // ignore collisions when dead after the first collision
+                {
+                    return;
+                }
+
+                switch (collision.gameObject.tag)
+                {
+                    case "Friendly":
+                        //do nothing
+                        break;
+                    case "Finish":
+                        StartSuccessSequence();
+                        break;
+                    default:
+                        StartDeathSequence();
+                        break;
+                }
+            }
         }
-        
-        switch (collision.gameObject.tag)
-        {
-            case "Friendly":
-                //do nothing
-                break;
-            case "Finish":
-                StartSuccessSequence();
-                break;
-            default:
-                StartDeathSequence();
-                break;
-        }
-    }
 
     private void StartSuccessSequence()
     {
