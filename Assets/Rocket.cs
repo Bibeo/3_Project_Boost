@@ -11,8 +11,7 @@ public class Rocket : MonoBehaviour
 
     bool collisionActive;
 
-    enum State { Alive, Dying, Transcending }
-    State state = State.Alive;
+    bool isTransitionning = false;
 
     [SerializeField] float rcsThrust = 200f;
     [SerializeField] float pwrThrust = 1000f;
@@ -37,7 +36,7 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == State.Alive)
+        if (!isTransitionning)
         {
             RepondToThrustInput();
             RespondToRotate();
@@ -68,7 +67,7 @@ public class Rocket : MonoBehaviour
         {
             if (collisionActive == true)
             {
-                if (state != State.Alive) // ignore collisions when dead after the first collision
+                if (isTransitionning) // ignore collisions when dead after the first collision
                 {
                     return;
                 }
@@ -90,7 +89,7 @@ public class Rocket : MonoBehaviour
 
     private void StartSuccessSequence()
     {
-        state = State.Transcending;
+        isTransitionning = true;
         rocketAudio.Stop();
         rocketAudio.PlayOneShot(successSound);
         successParticles.Play();
@@ -99,7 +98,7 @@ public class Rocket : MonoBehaviour
 
     private void StartDeathSequence()
     {
-        state = State.Dying;
+        isTransitionning = true;
         rocketAudio.Stop();
         rocketAudio.PlayOneShot(deathSound);
         deathParticles.Play();
@@ -142,9 +141,14 @@ public class Rocket : MonoBehaviour
         }
         else
         {
-            rocketAudio.Stop();
-            mainEngineParticles.Stop();
+            StopApplyingThrust();
         }
+    }
+
+    private void StopApplyingThrust()
+    {
+        rocketAudio.Stop();
+        mainEngineParticles.Stop();
     }
 
     private void ApplyThrust(float mainThrust)
@@ -159,17 +163,20 @@ public class Rocket : MonoBehaviour
 
     private void RespondToRotate()
     {
-        rocketRigidbody.freezeRotation = true; //Take manual control of the rotation
-        float rotationThisFrame = rcsThrust * Time.deltaTime;
-
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Rotate(Vector3.forward * rotationThisFrame);
+            RotateManually(rcsThrust * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Rotate(Vector3.back * rotationThisFrame);
-        }
+            RotateManually(-rcsThrust * Time.deltaTime);
+        } 
+    }
+
+    private void RotateManually(float rotationThisFrame)
+    {
+        rocketRigidbody.freezeRotation = true; //Take manual control of the rotation
+        transform.Rotate(Vector3.forward * rotationThisFrame);
         rocketRigidbody.freezeRotation = false; //Resume physics control of rotation
     }
 }
