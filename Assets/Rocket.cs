@@ -50,9 +50,13 @@ public class Rocket : MonoBehaviour
 
     private void RespondToDebugKeys()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             LoadNextLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoadPreviousLevel();
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
@@ -102,10 +106,25 @@ public class Rocket : MonoBehaviour
         Invoke("LoadFirstLevel", deathDelay);
     }
 
+    private void LoadPreviousLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex > 0)
+        {
+            int previousSceneIndex = currentSceneIndex - 1;
+            SceneManager.LoadScene(previousSceneIndex);
+        }
+    }
+
     private void LoadNextLevel()
     {
-        SceneManager.LoadScene(1);
-        rocketAudio.PlayOneShot(deathSound);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+            SceneManager.LoadScene(nextSceneIndex);
     }
 
     private void LoadFirstLevel()
